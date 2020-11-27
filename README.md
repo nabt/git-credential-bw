@@ -35,6 +35,9 @@ username=[username provided by `git-credential`]
 password=[pat field value, if it exists, or password value]
 ```
 
+### Logging
+Log output can be found at ${HOME}/tmp/logs/git-credential-bw.log
+
 ## Additional tools
 ### Add `bw-unlock` function to your bash config
 Add the following to your shell login script:
