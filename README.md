@@ -7,16 +7,16 @@ Add `git-credential-bw` script to a directory in your PATH.
 ## Configure git to use the helper
 ### Add to global config
 
-    ```
-    git config --global credential.helper bw
-    ```
+```
+git config --global credential.helper bw
+```
 
 ### Add to local config
 
-    ```
-    git config --local credential.username [username]
-    git config --local credential.helper bw
-    ```
+```
+git config --local credential.username [username]
+git config --local credential.helper bw
+```
 
 ### Personal Access Tokens
 If a perstonal access token is used, instead of a password, add a hidden field with a name of "pat" containing the token value to the Bitwarden entry.
@@ -39,6 +39,6 @@ password=[pat field value, if it exists, or password value]
 ### Add `bw-unlock` function to your bash config
 Add the following to your shell login script:
 
-    ```
-    source /path/to/bw-unlock
-    ```
+```
+source /path/to/bw-unlock
+```
