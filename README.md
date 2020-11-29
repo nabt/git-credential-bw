@@ -39,9 +39,11 @@ password=[pat field value, if it exists, or password value]
 Log output can be found at ${HOME}/tmp/logs/git-credential-bw.log
 
 ## Additional tools
-### Add `bw-unlock` function to your bash config
+### Add `bw-functions` to your bash config
 Add the following to your shell login script:
 
 ```
-source /path/to/bw-unlock
+source /path/to/bw-functions
 ```
+
+Restart your shell session, and type `bw-unlock`.  The function will step you through the `bw` session creation process, and export the session token to a global environment variable, named `BW_SESSION`.  This is the variable that `bw` uses for session verification, and allows for use of the Bitwarden CLI without the need to provide a password every time."

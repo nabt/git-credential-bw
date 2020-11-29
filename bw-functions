@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 bw-unlock() {
-    local bw_status
+    local bw_status job_number
     bw_status="$(bw status | jq -r '.status')"
     case "${bw_status}" in
         locked)
@@ -15,4 +15,17 @@ bw-unlock() {
     esac
     bw_status="$(bw status | jq -r '.status')"
     echo "Bitwarden: ${bw_status}"
+    (bw-lock 1 &)
+}
+
+bw-lock() {
+    local timeout sleep_time
+    timeout=0
+
+    [[ "$#" -gt 0 ]] && timeout="${1}"
+
+    sleep_time=$(( timeout * 60 ))
+    sleep ${sleep_time}
+
+    bw lock 
 }
