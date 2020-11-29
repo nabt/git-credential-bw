@@ -45,3 +45,5 @@ Add the following to your shell login script:
 ```
 source /path/to/bw-unlock
 ```
+
+Restart your shell session, and type `bw-unlock`.  The function will step you through the `bw` session creation process, and export the session token to a global environment variable, named `BW_SESSION`.  This is the variable that `bw` uses for session verification, and allows for use of the Bitwarden CLI without the need to provide a password every time."
