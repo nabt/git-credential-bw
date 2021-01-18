@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 bw-unlock() {
-    local bw_status job_number
+    local bw_status job_number timeout
+    timeout=15
+    [[ -n ${1} ]] && timeout=${1}
     bw_status="$(bw status 2>/dev/null | jq -R -r 'fromjson? | .status')"
     case "${bw_status}" in
         locked)
@@ -15,7 +17,7 @@ bw-unlock() {
     esac
     bw_status="$(bw status 2>/dev/null | jq -R -r 'fromjson? | .status')"
     echo "Bitwarden: ${bw_status}"
-    (bw-lock 1 &)
+    (bw-lock 15 &)
 }
 
 bw-lock() {
