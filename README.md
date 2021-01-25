@@ -46,4 +46,36 @@ Add the following to your shell login script:
 source /path/to/bw-functions
 ```
 
-Restart your shell session, and type `bw-unlock`.  The function will step you through the `bw` session creation process, and export the session token to a global environment variable, named `BW_SESSION`.  This is the variable that `bw` uses for session verification, and allows for use of the Bitwarden CLI without the need to provide a password every time."
+Restart your shell session to ensure the changes take affect.
+
+## Commands
+---
+`bw-unlock`
+
+Description:
+
+This function will step you through the `bw` session creation process, and export the session token to a global environment variable, named `BW_SESSION`. This is the variable that `bw` uses for session verification, and allows for use of the Bitwarden CLI without the need to provide a password every time. The function calls the `bw-lock` function with a specified timeout, which defaults to 15 minutes.
+
+Options:
+
+Options can be defined by command line argument or config file.  The config file is located at `$HOME/.config/git-credential-bw/config`.  Options in the config file should be defined one per line, in `key=value` format.
+
+Timeout:
+
+Command Line: `bw-unlock [timeout]`
+    `timeout` is defined in minutes
+
+Config File: `timeout=[value]`
+---
+`bw-lock`
+
+Description:
+
+Locks the BitWarden vault
+
+Options:
+
+Timeout:
+
+Command Line: `bw-lock [timeout]`
+    `timeout` is defined in minutes

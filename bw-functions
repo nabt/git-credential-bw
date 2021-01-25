@@ -3,7 +3,23 @@
 bw-unlock() {
     local bw_status job_number timeout
     timeout=15
-    [[ -n ${1} ]] && timeout=${1}
+    
+    if [[ -n ${1} ]]; then
+        timeout=${1}
+    elif [[ -f "$HOME/.config/git-credential-bw/config" ]]; then
+        while IFS= read -r line; do
+            key=$(echo "${line}" | cut -d= -f1)
+            value=$(echo "${line}" | cut -d= -f2)
+
+            case ${key} in
+                timeout)
+                    timeout=${value}
+                    ;;
+                *)
+                    ;;
+            esac
+        done < "$HOME/.config/git-credential-bw/config"
+    fi 
     bw_status="$(bw status 2>/dev/null | jq -R -r 'fromjson? | .status')"
     case "${bw_status}" in
         locked)
@@ -17,7 +33,7 @@ bw-unlock() {
     esac
     bw_status="$(bw status 2>/dev/null | jq -R -r 'fromjson? | .status')"
     echo "Bitwarden: ${bw_status}"
-    (bw-lock 15 &)
+    (bw-lock ${timeout} &)
 }
 
 bw-lock() {
